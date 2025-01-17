@@ -1,4 +1,4 @@
-FROM golang:1.16
+FROM golang:1.23.5
 LABEL maintainer="GitHub, Inc."
 
 WORKDIR /go/src/github.com/git-lfs/lfs-test-server

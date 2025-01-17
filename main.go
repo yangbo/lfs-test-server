@@ -21,7 +21,7 @@ var (
 	logger = NewKVLogger(os.Stdout)
 )
 
-//go:embed mgmt/**
+//go:embed all:mgmt/*
 var embedded embed.FS
 
 // tcpKeepAliveListener sets TCP keep-alive timeouts on accepted
