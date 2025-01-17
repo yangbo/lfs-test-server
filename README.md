@@ -149,3 +149,48 @@ Outputs the full OID record
 % ./lfs-test-server cmd 7c9414fe21ad7b45ffb6e72da86f9a9e13dbb2971365ae7bcb8cc7fbbba7419c
 &{Oid:7c9414fe21ad7b45ffb6e72da86f9a9e13dbb2971365ae7bcb8cc7fbbba7419c Size:3334144 Existing:false}
 ```
+
+# Docker
+
+We can use docker to run lfs-test-server and configure environment variables using env.txt, creating a volume named `lfs-volume` to store lfs-content and lfs.db.
+
+```
+# suppose the image name is lfs-server, we can use the command below to start container.
+
+docker run --name lfs-server -p 8080:8080 --env-file env.txt -v lfs-volume:/git-lfs -it lfs-server
+```
+
+env.txt
+```
+# The address:port the server listens on, default: "tcp://:8080"
+LFS_LISTEN=tcp://:8080
+
+# The host used when the server generates URLs, default: "localhost:8080"
+LFS_HOST=localhost:8080
+
+# The database file the server uses to store meta information, default: "lfs.db"
+LFS_METADB=/git-lfs/lfs.db
+
+# The path where LFS files are store, default: "lfs-content"
+LFS_CONTENTPATH=/git-lfs/lfs-content
+
+# An administrator username, default: not set
+LFS_ADMINUSER=admin
+
+# An administrator password, default: not set
+LFS_ADMINPASS=admin5202
+
+# Certificate file for tls
+LFS_CERT=/git-lfs/cert.pem
+
+# tls key
+LFS_KEY=/git-lfs/key.pem
+
+# set to 'https' to override default http
+LFS_SCHEME=http
+
+# set to 'true' to enable tusd (tus.io) resumable upload server; tusd must be on PATH, installed separately
+# LFS_USETUS
+# The host used to start the tusd upload server, default "localhost:1080"
+# LFS_TUSHOST
+```
