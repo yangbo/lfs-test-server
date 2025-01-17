@@ -155,6 +155,14 @@ Outputs the full OID record
 We can use docker to run lfs-test-server and configure environment variables using env.txt, creating a volume named `lfs-volume` to store lfs-content and lfs.db.
 
 ```
+# pull image
+
+docker pull crpi-079rewyo0p66lj91.cn-beijing.personal.cr.aliyuncs.com/terawin/git-lfs-server:v20250117-2
+
+# add name alias
+
+docker tag crpi-079rewyo0p66lj91.cn-beijing.personal.cr.aliyuncs.com/terawin/git-lfs-server:v20250117-2 lfs-server:latest
+
 # suppose the image name is lfs-server, we can use the command below to start container.
 
 docker run --name lfs-server -p 8080:8080 --env-file env.txt -v lfs-volume:/git-lfs -it lfs-server
